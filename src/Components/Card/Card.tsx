@@ -66,9 +66,9 @@ import ReactDOM from "react-dom";
       event_key: number;
       event_date: string;
       event_time: string;
-      event_home_team: string;
+      event_home_team?: string;
       home_team_key: number;
-      event_away_team: string;
+      event_away_team?: string;
       away_team_key: number;
       event_halftime_result: string;
       event_final_result: string;
@@ -106,10 +106,9 @@ import ReactDOM from "react-dom";
 
 // }
 
-
 const apiKey = "581fb55ff92d00056049811d83a45652c46ae3ff89ec0166c24366d92d25a22c"
 function Card(): JSX.Element {
-const [users, setUsers] = useState<liveScore>({});
+const [teams, setTeams] = useState<liveScore>({});
 
     // const apiKey = "5aa9fcce24396558941310cd46d3a4499e45318738e277271468dd16c1e5e412"
 //     let homeTeamImage ;
@@ -132,8 +131,10 @@ const [users, setUsers] = useState<liveScore>({});
 
 useEffect(() => {
   getApiData().then(res => {
-    setUsers(res)
+    setTeams(res)
+    // console.log(teams);
   });
+  
 }, []);
 
 // Function to collect data
@@ -149,23 +150,33 @@ async function getApiData() {
   const response:liveScore = await fetch(
     `https://apiv2.allsportsapi.com/football/?met=Livescore&APIkey=${apiKey}`
   ).then((response) => response.json());
-  console.log(response.result);
+  // .then(response => console.log(response.result);
+  // )
+  // console.log(response.result[0]);
   
     return response;
 }
 
 
 
-return ( users[0].event_key ?
-
+// return (
+return ( 
     <div className="Card">
-      event key: {users[0].event_key}
-      {/* <ul> */}
-      {/* {users.result[0].event_key ?  
+      {/* <p>{teams.map((team) => {team.event_key})}</p> */}
+      <div className="home-team-image team">
+        
+          {teams.result? teams.result[0].event_home_team : "Loading"}
+          <img className="team-logo" src={teams.result? teams.result[0].home_team_logo : "Loading"} alt="" />
+        </div>
+       VS
+      <div className="home-team-image team">{teams.result? teams.result[0].event_away_team : "Loading"}
+          <img className="team-logo" src={teams.result? teams.result[0].away_team_logo : "Loading"} alt="" />
+      </div>
+       {/* {users.result[0].event_key ?  
        <li key={users.result[0].country_name}>{users.result[0].country_name}</li> : <></>
         }
       </ul> */}
-    </div> : <></>
+    </div>
 
 
     // <div className="Card">

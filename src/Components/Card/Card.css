@@ -14,5 +14,15 @@
     justify-content: space-around !important;
     align-items: center;
     height: 200px;
-    color: red;
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-logo {
+    width: 80px;
 }
