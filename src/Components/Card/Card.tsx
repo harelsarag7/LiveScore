@@ -104,10 +104,31 @@ import "./Card.css";
 return (
   <div className="Card" key={game.event_key}>
 
-    <ul>
+    {/* <ul>
       <li>{game.event_home_team}</li>
       <li>{game.event_away_team}</li>
-    </ul>
+    </ul> */}
+
+
+    <div className="info-container">
+
+<div className="home-team-image team">
+
+    {game.event_home_team}
+    <img className="team-logo" src={game.home_team_logo} alt="" />
+  </div>
+  <div className="score-container">
+     VS
+     <span className="score-live" >{game.event_final_result}</span>
+     <span>{game.event_status}'</span>
+  </div>
+<div className="home-team-image team">{game.event_away_team}
+    <img className="team-logo" src={game.away_team_logo} alt="" />
+</div>
+</div>
+
+
+
   </div>
 )
   }
@@ -129,10 +150,10 @@ export default Card;
 //   <div className="info-container">
 
 //   <div className="home-team-image team">
-//     <ul>
+//     {/* <ul>
 //     {teamsMap? teamsMap.map((game) =>
 //      <li>{game.country_name}</li>): <></>}
-//     </ul>
+//     </ul> */}
 //       {props.result[0].event_home_team}
 //       <img className="team-logo" src={teams.result[counter].home_team_logo} alt="" />
 //     </div>
